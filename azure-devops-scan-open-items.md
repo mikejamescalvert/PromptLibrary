@@ -18,6 +18,7 @@ I have a Personal Access Token for Azure DevOps stored in a local environment va
    - Bugs, Tasks, User Stories, Features, Epics, and any other work item types present.
    - Use WIQL query: `SELECT [System.Id] FROM WorkItems WHERE [System.State] <> 'Closed' AND [System.State] <> 'Removed' AND [System.State] <> 'Done' ORDER BY [System.CreatedDate] DESC`
    - Fetch full details for each work item (title, state, type, assigned to, iteration, area path, tags, created date).
+   - Note: The workitems endpoint accepts max 200 IDs per request. Batch requests accordingly if the WIQL query returns more than 200 results.
 4. Provide an analysis covering:
    - **Summary** — Total open item count, broken down by work item type and state.
    - **Ownership** — Who has the most items assigned? Are there unassigned items?

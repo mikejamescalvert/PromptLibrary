@@ -35,38 +35,12 @@ Help me set up an MCP server connection for Claude Code.
    - **Option B: Environment variables** — Guide me through setting up environment variables for the connection, then store the variable names in memory.
    - **Option C: Both** — Store config in memory and set up environment variables for secrets.
 
-4. Generate the MCP server configuration for `~/.claude/claude_desktop_config.json` (or the appropriate settings file):
-
-   Example SQL (MSSQL) config:
-   ```json
-   {
-     "mcpServers": {
-       "my-database": {
-         "command": "npx",
-         "args": ["-y", "@anthropic/mcp-server-mssql"],
-         "env": {
-           "MSSQL_CONNECTION_STRING": "${MSSQL_CONN_STR}"
-         }
-       }
-     }
-   }
-   ```
-
-   Example API config:
-   ```json
-   {
-     "mcpServers": {
-       "my-api": {
-         "command": "npx",
-         "args": ["-y", "@anthropic/mcp-server-fetch"],
-         "env": {
-           "API_BASE_URL": "https://api.example.com",
-           "API_KEY": "${MY_API_KEY}"
-         }
-       }
-     }
-   }
-   ```
+4. Register the MCP server using the Claude Code CLI or by editing the appropriate config file:
+   - Preferred: use `claude mcp add` to register the server.
+   - Manual: add to `.mcp.json` (project-level, shared via source control) or `~/.claude.json` (user-level, private).
+   - Do NOT use `claude_desktop_config.json` — that is for the Claude Desktop app, not Claude Code.
+   - On Windows (not WSL), wrap npx commands with `cmd /c`.
+   - See the Reference section below for config examples and correct package names.
 
 5. Test the connection:
    - For SQL: run a simple query like `SELECT 1` or `SELECT @@VERSION`.
@@ -87,19 +61,92 @@ Help me set up an MCP server connection for Claude Code.
 | `CONNECTION_NAME`  | Friendly name for this connection                    | `prod-db`, `billing-api`         |
 | `PERSISTENCE`      | Where to store config (memory, env vars, or both)    | `both`                           |
 
-## Supported MCP Server Packages
+## Reference
 
-| Type       | Package                              | Notes                      |
-| ---------- | ------------------------------------ | -------------------------- |
-| PostgreSQL | `@anthropic/mcp-server-postgres`     | Uses `DATABASE_URL`        |
-| MySQL      | `@anthropic/mcp-server-mysql`        | Uses connection string     |
-| MSSQL      | `@anthropic/mcp-server-mssql`        | Uses `MSSQL_CONNECTION_STRING` |
-| SQLite     | `@anthropic/mcp-server-sqlite`       | Uses file path             |
-| REST API   | `@anthropic/mcp-server-fetch`        | Generic HTTP fetch         |
+### MCP Server Packages
+
+The recommended multi-database MCP server is `@bytebase/dbhub`, which supports PostgreSQL, MySQL, MSSQL, and SQLite through a single package using DSN connection strings.
+
+| Type       | Package                                  | Notes                                          |
+| ---------- | ---------------------------------------- | ---------------------------------------------- |
+| Multi-DB   | `@bytebase/dbhub`                        | Recommended. Supports Postgres, MySQL, MSSQL, SQLite via `--dsn` |
+| PostgreSQL | `@modelcontextprotocol/server-postgres`  | Deprecated/archived. Use dbhub instead         |
+| SQLite     | `@modelcontextprotocol/server-sqlite`    | Deprecated/archived. Use dbhub instead         |
+| REST API   | `mcp-server-fetch` (Python/PyPI)         | Run via `uvx mcp-server-fetch`. Not an npm package |
+
+### Config File Locations
+
+| Scope   | File                  | Purpose                                    |
+| ------- | --------------------- | ------------------------------------------ |
+| Project | `.mcp.json`           | Shared via source control with the team    |
+| User    | `~/.claude.json`      | Private to you, available in all projects  |
+
+### CLI Registration (preferred)
+
+```bash
+# SQL via dbhub
+claude mcp add my-db -- npx -y @bytebase/dbhub@latest --dsn "postgresql://user:pass@localhost:5432/mydb"
+
+# Fetch (Python-based)
+claude mcp add fetch -- uvx mcp-server-fetch
+
+# List configured servers
+claude mcp list
+```
+
+### Manual Config Examples
+
+**SQL database via dbhub** (`.mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "my-database": {
+      "command": "npx",
+      "args": ["-y", "@bytebase/dbhub@latest", "--dsn", "postgresql://user:pass@localhost:5432/mydb"]
+    }
+  }
+}
+```
+
+**SQL database via dbhub on Windows** (`.mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "my-database": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@bytebase/dbhub@latest", "--dsn", "postgresql://user:pass@localhost:5432/mydb"]
+    }
+  }
+}
+```
+
+**REST API fetch** (`.mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "fetch": {
+      "command": "uvx",
+      "args": ["mcp-server-fetch"]
+    }
+  }
+}
+```
+
+### DSN Formats for dbhub
+
+| Database   | DSN Format                                                  |
+| ---------- | ----------------------------------------------------------- |
+| PostgreSQL | `postgresql://user:pass@host:5432/dbname`                   |
+| MySQL      | `mysql://user:pass@host:3306/dbname`                        |
+| MSSQL      | `sqlserver://user:pass@host:1433/dbname`                    |
+| SQLite     | `sqlite:///path/to/database.db`                             |
 
 ## Expected Outcome
 
-1. MCP server configuration generated and added to the appropriate config file.
+1. MCP server registered via CLI or config file.
 2. Connection tested and verified working.
 3. Connection details (excluding secrets) saved to Claude memory or environment variables as chosen.
 4. Future sessions can reference the connection by name without re-entering details.

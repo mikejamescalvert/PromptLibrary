@@ -33,26 +33,22 @@ Help me set up an ETL pipeline in a GitHub repository.
 
 5. Scaffold the project with this structure:
 
-   ```
-   <pipeline-name>/
-   ├── .github/
-   │   └── workflows/
-   │       └── etl.yml              # GitHub Actions workflow
-   ├── src/
-   │   ├── extract.py               # Data extraction from source(s)
-   │   ├── transform.py             # Transformation logic
-   │   ├── load.py                  # Data loading to target(s)
-   │   ├── pipeline.py              # Orchestrator — runs extract → transform → load
-   │   └── config.py                # Configuration and environment variable loading
-   ├── tests/
-   │   ├── test_extract.py          # Unit tests for extraction
-   │   ├── test_transform.py        # Unit tests for transformations
-   │   └── test_load.py             # Unit tests for loading
-   ├── requirements.txt             # Python dependencies
-   ├── .env.example                 # Template for required environment variables (no secrets)
-   ├── .gitignore
-   └── README.md                    # Pipeline documentation
-   ```
+       <pipeline-name>/
+       ├── .github/workflows/etl.yml    — GitHub Actions workflow
+       ├── src/
+       │   ├── extract.py               — Data extraction from source(s)
+       │   ├── transform.py             — Transformation logic
+       │   ├── load.py                  — Data loading to target(s)
+       │   ├── pipeline.py              — Orchestrator: extract → transform → load
+       │   └── config.py                — Configuration and env var loading
+       ├── tests/
+       │   ├── test_extract.py          — Unit tests for extraction
+       │   ├── test_transform.py        — Unit tests for transformations
+       │   └── test_load.py             — Unit tests for loading
+       ├── requirements.txt             — Python dependencies
+       ├── .env.example                 — Template for required env vars (no secrets)
+       ├── .gitignore
+       └── README.md                    — Pipeline documentation
 
 6. Generate the code for each module:
 

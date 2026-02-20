@@ -14,4 +14,5 @@ A collection of standard prompts for use with Claude and other AI assistants.
 | [azure-devops-scan-open-items](azure-devops-scan-open-items.md) | Scan an Azure DevOps project for open work items and provide analysis |
 | [etl-pipeline-setup](etl-pipeline-setup.md) | Scaffold and run an ETL pipeline from a GitHub repo with scheduled Actions |
 | [manual-test-with-screenshots](manual-test-with-screenshots.md) | Run manual tests with screenshot analysis and structured reporting |
+| [pr-review-reminder-pipeline](pr-review-reminder-pipeline.md) | Daily email reminder for open PRs awaiting review |
 | [mcp-connection-setup](mcp-connection-setup.md) | Set up an MCP server connection to a SQL database or API service |

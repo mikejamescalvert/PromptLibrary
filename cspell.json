@@ -23,10 +23,12 @@
     "ruff",
     "scaffolding",
     "sqlserver",
+    "toasts",
     "trivy",
     "tsconfig",
     "typecheck",
     "uvx",
+    "VSTS",
     "wiql"
   ],
   "ignorePaths": [

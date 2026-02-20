@@ -1,0 +1,35 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "bytebase",
+    "dbhub",
+    "cspell",
+    "devops",
+    "dotall",
+    "gofmt",
+    "golangci",
+    "heredoc",
+    "lychee",
+    "markdownlint",
+    "mssql",
+    "mypy",
+    "noEmit",
+    "npx",
+    "Pylint",
+    "Pyright",
+    "pytest",
+    "rubocop",
+    "ruff",
+    "scaffolding",
+    "sqlserver",
+    "trivy",
+    "tsconfig",
+    "typecheck",
+    "uvx",
+    "wiql"
+  ],
+  "ignorePaths": [
+    ".github/**"
+  ]
+}

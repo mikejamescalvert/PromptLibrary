@@ -28,6 +28,7 @@
     "tsconfig",
     "typecheck",
     "uvx",
+    "VSTS",
     "wiql"
   ],
   "ignorePaths": [

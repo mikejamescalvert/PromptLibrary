@@ -73,6 +73,7 @@ Help me run and record a manual test session.
 ### Screenshot analysis tips
 
 When analyzing a screenshot, check for:
+
 - Page title, URL bar, or breadcrumbs to confirm correct navigation.
 - Form fields — are they populated correctly? Are there validation errors?
 - Success/error messages — banners, toasts, modals.

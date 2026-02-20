@@ -23,6 +23,7 @@
     "ruff",
     "scaffolding",
     "sqlserver",
+    "toasts",
     "trivy",
     "tsconfig",
     "typecheck",

@@ -15,4 +15,5 @@ A collection of standard prompts for use with Claude and other AI assistants.
 | [etl-pipeline-setup](etl-pipeline-setup.md) | Scaffold and run an ETL pipeline from a GitHub repo with scheduled Actions |
 | [manual-test-with-screenshots](manual-test-with-screenshots.md) | Run manual tests with screenshot analysis and structured reporting |
 | [pr-review-reminder-pipeline](pr-review-reminder-pipeline.md) | Daily email reminder for open PRs awaiting review |
+| [clone-and-init-claude](clone-and-init-claude.md) | Clone a repo and run `/init` to generate a CLAUDE.md |
 | [mcp-connection-setup](mcp-connection-setup.md) | Set up an MCP server connection to a SQL database or API service |

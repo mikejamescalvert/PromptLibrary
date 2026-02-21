@@ -17,3 +17,4 @@ A collection of standard prompts for use with Claude and other AI assistants.
 | [pr-review-reminder-pipeline](pr-review-reminder-pipeline.md) | Daily email reminder for open PRs awaiting review |
 | [clone-and-init-claude](clone-and-init-claude.md) | Clone a repo and run `/init` to generate a CLAUDE.md |
 | [mcp-connection-setup](mcp-connection-setup.md) | Set up an MCP server connection to a SQL database or API service |
+| [environment-tool-check](environment-tool-check.md) | Verify Python, pip, PDF/Office/image/SQL/gh tools and install anything missing |
